@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qinchy.swaggerdemo.dao.SysUserMapper" >
+  <resultMap id="BaseResultMap" type="com.qinchy.swaggerdemo.model.SysUser" >
+    <id column="USER_ID" property="userId" jdbcType="INTEGER" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="LOGIN_NAME" property="loginName" jdbcType="VARCHAR" />
+    <result column="ORG_ID" property="orgId" jdbcType="INTEGER" />
+    <result column="MAIL" property="mail" jdbcType="VARCHAR" />
+    <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="EXPIRE_TIME" property="expireTime" jdbcType="TIMESTAMP" />
+    <result column="LAST_MODIFY_PWD_TIME" property="lastModifyPwdTime" jdbcType="TIMESTAMP" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="LANGUAGE_CODE" property="languageCode" jdbcType="VARCHAR" />
+    <result column="EMP_ID" property="empId" jdbcType="INTEGER" />
+    <result column="FIRST_NAME" property="firstName" jdbcType="VARCHAR" />
+    <result column="LAST_NAME" property="lastName" jdbcType="VARCHAR" />
+    <result column="PINCODE_CODE" property="pincodeCode" jdbcType="VARCHAR" />
+    <result column="COUNTY_CODE" property="countyCode" jdbcType="SMALLINT" />
+    <result column="PROV_CODE" property="provCode" jdbcType="SMALLINT" />
+    <result column="REGION_CODE" property="regionCode" jdbcType="SMALLINT" />
+    <result column="TENANT_ID" property="tenantId" jdbcType="BIGINT" />
+    <result column="IS_ADMIN" property="isAdmin" jdbcType="SMALLINT" />
+    <result column="random_value" property="randomValue" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    USER_ID, NAME, LOGIN_NAME, ORG_ID, MAIL, PASSWORD, STATUS, PHONE, ADDRESS, EXPIRE_TIME, 
+    LAST_MODIFY_PWD_TIME, REMARK, LANGUAGE_CODE, EMP_ID, FIRST_NAME, LAST_NAME, PINCODE_CODE, 
+    COUNTY_CODE, PROV_CODE, REGION_CODE, TENANT_ID, IS_ADMIN, random_value
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qinchy.swaggerdemo.model.SysUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_user
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qinchy.swaggerdemo.model.SysUserExample" >
+    delete from sys_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qinchy.swaggerdemo.model.SysUser" >
+    insert into sys_user (USER_ID, NAME, LOGIN_NAME, 
+      ORG_ID, MAIL, PASSWORD, 
+      STATUS, PHONE, ADDRESS, 
+      EXPIRE_TIME, LAST_MODIFY_PWD_TIME, REMARK, 
+      LANGUAGE_CODE, EMP_ID, FIRST_NAME, 
+      LAST_NAME, PINCODE_CODE, COUNTY_CODE, 
+      PROV_CODE, REGION_CODE, TENANT_ID, 
+      IS_ADMIN, random_value)
+    values (#{userId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, 
+      #{orgId,jdbcType=INTEGER}, #{mail,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{expireTime,jdbcType=TIMESTAMP}, #{lastModifyPwdTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
+      #{languageCode,jdbcType=VARCHAR}, #{empId,jdbcType=INTEGER}, #{firstName,jdbcType=VARCHAR}, 
+      #{lastName,jdbcType=VARCHAR}, #{pincodeCode,jdbcType=VARCHAR}, #{countyCode,jdbcType=SMALLINT}, 
+      #{provCode,jdbcType=SMALLINT}, #{regionCode,jdbcType=SMALLINT}, #{tenantId,jdbcType=BIGINT}, 
+      #{isAdmin,jdbcType=SMALLINT}, #{randomValue,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qinchy.swaggerdemo.model.SysUser" >
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="loginName != null" >
+        LOGIN_NAME,
+      </if>
+      <if test="orgId != null" >
+        ORG_ID,
+      </if>
+      <if test="mail != null" >
+        MAIL,
+      </if>
+      <if test="password != null" >
+        PASSWORD,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="phone != null" >
+        PHONE,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="expireTime != null" >
+        EXPIRE_TIME,
+      </if>
+      <if test="lastModifyPwdTime != null" >
+        LAST_MODIFY_PWD_TIME,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="languageCode != null" >
+        LANGUAGE_CODE,
+      </if>
+      <if test="empId != null" >
+        EMP_ID,
+      </if>
+      <if test="firstName != null" >
+        FIRST_NAME,
+      </if>
+      <if test="lastName != null" >
+        LAST_NAME,
+      </if>
+      <if test="pincodeCode != null" >
+        PINCODE_CODE,
+      </if>
+      <if test="countyCode != null" >
+        COUNTY_CODE,
+      </if>
+      <if test="provCode != null" >
+        PROV_CODE,
+      </if>
+      <if test="regionCode != null" >
+        REGION_CODE,
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID,
+      </if>
+      <if test="isAdmin != null" >
+        IS_ADMIN,
+      </if>
+      <if test="randomValue != null" >
+        random_value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="loginName != null" >
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="mail != null" >
+        #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="expireTime != null" >
+        #{expireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyPwdTime != null" >
+        #{lastModifyPwdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="languageCode != null" >
+        #{languageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="empId != null" >
+        #{empId,jdbcType=INTEGER},
+      </if>
+      <if test="firstName != null" >
+        #{firstName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastName != null" >
+        #{lastName,jdbcType=VARCHAR},
+      </if>
+      <if test="pincodeCode != null" >
+        #{pincodeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="countyCode != null" >
+        #{countyCode,jdbcType=SMALLINT},
+      </if>
+      <if test="provCode != null" >
+        #{provCode,jdbcType=SMALLINT},
+      </if>
+      <if test="regionCode != null" >
+        #{regionCode,jdbcType=SMALLINT},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=BIGINT},
+      </if>
+      <if test="isAdmin != null" >
+        #{isAdmin,jdbcType=SMALLINT},
+      </if>
+      <if test="randomValue != null" >
+        #{randomValue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qinchy.swaggerdemo.model.SysUserExample" resultType="java.lang.Integer" >
+    select count(*) from sys_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_user
+    <set >
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginName != null" >
+        LOGIN_NAME = #{record.loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgId != null" >
+        ORG_ID = #{record.orgId,jdbcType=INTEGER},
+      </if>
+      <if test="record.mail != null" >
+        MAIL = #{record.mail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        PASSWORD = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        PHONE = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        ADDRESS = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expireTime != null" >
+        EXPIRE_TIME = #{record.expireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastModifyPwdTime != null" >
+        LAST_MODIFY_PWD_TIME = #{record.lastModifyPwdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.languageCode != null" >
+        LANGUAGE_CODE = #{record.languageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.empId != null" >
+        EMP_ID = #{record.empId,jdbcType=INTEGER},
+      </if>
+      <if test="record.firstName != null" >
+        FIRST_NAME = #{record.firstName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastName != null" >
+        LAST_NAME = #{record.lastName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pincodeCode != null" >
+        PINCODE_CODE = #{record.pincodeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countyCode != null" >
+        COUNTY_CODE = #{record.countyCode,jdbcType=SMALLINT},
+      </if>
+      <if test="record.provCode != null" >
+        PROV_CODE = #{record.provCode,jdbcType=SMALLINT},
+      </if>
+      <if test="record.regionCode != null" >
+        REGION_CODE = #{record.regionCode,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tenantId != null" >
+        TENANT_ID = #{record.tenantId,jdbcType=BIGINT},
+      </if>
+      <if test="record.isAdmin != null" >
+        IS_ADMIN = #{record.isAdmin,jdbcType=SMALLINT},
+      </if>
+      <if test="record.randomValue != null" >
+        random_value = #{record.randomValue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_user
+    set USER_ID = #{record.userId,jdbcType=INTEGER},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      LOGIN_NAME = #{record.loginName,jdbcType=VARCHAR},
+      ORG_ID = #{record.orgId,jdbcType=INTEGER},
+      MAIL = #{record.mail,jdbcType=VARCHAR},
+      PASSWORD = #{record.password,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      PHONE = #{record.phone,jdbcType=VARCHAR},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      EXPIRE_TIME = #{record.expireTime,jdbcType=TIMESTAMP},
+      LAST_MODIFY_PWD_TIME = #{record.lastModifyPwdTime,jdbcType=TIMESTAMP},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      LANGUAGE_CODE = #{record.languageCode,jdbcType=VARCHAR},
+      EMP_ID = #{record.empId,jdbcType=INTEGER},
+      FIRST_NAME = #{record.firstName,jdbcType=VARCHAR},
+      LAST_NAME = #{record.lastName,jdbcType=VARCHAR},
+      PINCODE_CODE = #{record.pincodeCode,jdbcType=VARCHAR},
+      COUNTY_CODE = #{record.countyCode,jdbcType=SMALLINT},
+      PROV_CODE = #{record.provCode,jdbcType=SMALLINT},
+      REGION_CODE = #{record.regionCode,jdbcType=SMALLINT},
+      TENANT_ID = #{record.tenantId,jdbcType=BIGINT},
+      IS_ADMIN = #{record.isAdmin,jdbcType=SMALLINT},
+      random_value = #{record.randomValue,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qinchy.swaggerdemo.model.SysUser" >
+    update sys_user
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="loginName != null" >
+        LOGIN_NAME = #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        ORG_ID = #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="mail != null" >
+        MAIL = #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="expireTime != null" >
+        EXPIRE_TIME = #{expireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyPwdTime != null" >
+        LAST_MODIFY_PWD_TIME = #{lastModifyPwdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="languageCode != null" >
+        LANGUAGE_CODE = #{languageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="empId != null" >
+        EMP_ID = #{empId,jdbcType=INTEGER},
+      </if>
+      <if test="firstName != null" >
+        FIRST_NAME = #{firstName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastName != null" >
+        LAST_NAME = #{lastName,jdbcType=VARCHAR},
+      </if>
+      <if test="pincodeCode != null" >
+        PINCODE_CODE = #{pincodeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="countyCode != null" >
+        COUNTY_CODE = #{countyCode,jdbcType=SMALLINT},
+      </if>
+      <if test="provCode != null" >
+        PROV_CODE = #{provCode,jdbcType=SMALLINT},
+      </if>
+      <if test="regionCode != null" >
+        REGION_CODE = #{regionCode,jdbcType=SMALLINT},
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID = #{tenantId,jdbcType=BIGINT},
+      </if>
+      <if test="isAdmin != null" >
+        IS_ADMIN = #{isAdmin,jdbcType=SMALLINT},
+      </if>
+      <if test="randomValue != null" >
+        random_value = #{randomValue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qinchy.swaggerdemo.model.SysUser" >
+    update sys_user
+    set NAME = #{name,jdbcType=VARCHAR},
+      LOGIN_NAME = #{loginName,jdbcType=VARCHAR},
+      ORG_ID = #{orgId,jdbcType=INTEGER},
+      MAIL = #{mail,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      EXPIRE_TIME = #{expireTime,jdbcType=TIMESTAMP},
+      LAST_MODIFY_PWD_TIME = #{lastModifyPwdTime,jdbcType=TIMESTAMP},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      LANGUAGE_CODE = #{languageCode,jdbcType=VARCHAR},
+      EMP_ID = #{empId,jdbcType=INTEGER},
+      FIRST_NAME = #{firstName,jdbcType=VARCHAR},
+      LAST_NAME = #{lastName,jdbcType=VARCHAR},
+      PINCODE_CODE = #{pincodeCode,jdbcType=VARCHAR},
+      COUNTY_CODE = #{countyCode,jdbcType=SMALLINT},
+      PROV_CODE = #{provCode,jdbcType=SMALLINT},
+      REGION_CODE = #{regionCode,jdbcType=SMALLINT},
+      TENANT_ID = #{tenantId,jdbcType=BIGINT},
+      IS_ADMIN = #{isAdmin,jdbcType=SMALLINT},
+      random_value = #{randomValue,jdbcType=VARCHAR}
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>

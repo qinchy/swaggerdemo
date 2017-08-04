@@ -12,7 +12,7 @@
 
         <!-- 数据库链接URL、用户名、密码 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/ds_0?characterEncoding=utf8" userId="root"
+                        connectionURL="jdbc:mysql://localhost:3306/ds_0?characterEncoding=utf8&amp;useSSL=true" userId="root"
                         password="admin">
         </jdbcConnection>
 
@@ -40,7 +40,15 @@
         </javaClientGenerator>
 
         <!-- 要生成那些表(更改tableName和domainObjectName就可以) -->
+        <!--
         <table tableName="t_order_0" domainObjectName="Order" enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"/>
+
+        <table tableName="sys_user" domainObjectName="SysUser" enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"/>
+        -->
+
+        <table tableName="sys_org" domainObjectName="SysOrg" enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"/>
     </context>
 </generatorConfiguration>
