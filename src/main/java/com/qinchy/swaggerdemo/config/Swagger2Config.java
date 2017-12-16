@@ -23,6 +23,7 @@ public class Swagger2Config {
                 .build();
     }
 
+    // 访问swagger的ui地址：http://localhost:8080/swaggerdemo/swagger-ui.html
     private ApiInfo apiInfo(){
         return new ApiInfoBuilder()
                 .title("springboot利用swagger2构建api文档")
