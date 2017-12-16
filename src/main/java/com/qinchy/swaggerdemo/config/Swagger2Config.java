@@ -27,7 +27,7 @@ public class Swagger2Config {
         return new ApiInfoBuilder()
                 .title("springboot利用swagger2构建api文档")
                 .description("简单优雅的restful风格")
-                .termsOfServiceUrl("http://localhost:8080/swaggerdemo")
+                .termsOfServiceUrl("http://localhost:8080/swaggerdemo/api")
                 .version("1.0")
                 .build();
     }

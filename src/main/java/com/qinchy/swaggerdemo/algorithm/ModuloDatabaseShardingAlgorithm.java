@@ -27,6 +27,7 @@ public class ModuloDatabaseShardingAlgorithm implements SingleKeyDatabaseShardin
         Collection<String> result = new LinkedHashSet<>(availableTargetNames.size());
         for (Long value : shardingValue.getValues()) {
             for (String tableName : availableTargetNames) {
+                // 表名是table_0和table_1的样式
                 if (tableName.endsWith(value % 2 + "")) {
                     result.add(tableName);
                 }
